@@ -53,7 +53,7 @@ function getMostPopularBooks(books) {
 // Returns an array of top 5 author objects based on the total borrows of their books
 function getMostPopularAuthors(books, authors) {
   let result = authors.map((authorObj) => {
-    const name = `${authorObj.name.first} ${authorObj.name.last}`;
+    const name = nameHelper(authorObj);
     let count = 0;
     books.forEach((bookObj) => {
       if (bookObj.authorId === authorObj.id) {
@@ -66,6 +66,11 @@ function getMostPopularAuthors(books, authors) {
     return authorB.count - authorA.count;
   });
   return result.slice(0, 5);
+}
+
+// Helper function
+function nameHelper(author) {
+  return `${author.name.first} ${author.name.last}`;
 }
 
 module.exports = {
